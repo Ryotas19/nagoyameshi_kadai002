@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import axiosInstance from '../api/axiosInstance'
 import AuthContext from '../context/AuthContext'  // 実際のパスに合わせてください
 
-console.log("API_URL:", process.env.REACT_APP_API_URL)
+console.log("API_URL:", process.env.REACT_APP_API_URL);
 
 const UpgradeSuccessPage = () => {
   const [loading, setLoading] = useState(true)
