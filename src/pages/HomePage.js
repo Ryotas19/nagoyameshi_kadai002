@@ -31,6 +31,8 @@ const RestaurantCard = ({ restaurant }) => (
         <img src={restaurant.image || 'https://placehold.co/600x400/F0AD4E/FFFFFF?text=NAGOYAMESHI'} alt={restaurant.name} className="w-full h-48 object-cover" />
         <div className="p-4 flex flex-col flex-grow">
             <h3 className="text-xl font-bold text-gray-800">{restaurant.name}</h3>
+            {restaurant.price_range && (
+            <p className="text-sm text-yellow-600 font-bold mb-1">価格帯: {restaurant.price_range}</p>)}
             <p className="text-gray-600 mt-1 flex-grow">{restaurant.description}</p>
             <p className="text-sm text-gray-500 mt-2">カテゴリ: {restaurant.category_name || '未分類'}</p>
             <p className="text-sm text-yellow-500">平均評価: {restaurant.avg_rating ? Number(restaurant.avg_rating).toFixed(1) : '評価なし'}</p>
