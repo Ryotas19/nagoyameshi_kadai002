@@ -181,6 +181,11 @@ const RestaurantDetailPage = () => {
           <span className="inline-block bg-blue-100 text-blue-800 text-sm font-semibold mr-2 px-3 py-1 rounded-full">
             {restaurant.category_name}
           </span>
+            {restaurant.price_range && (
+          <span className="inline-block bg-yellow-100 text-yellow-800 text-sm font-semibold mr-2 px-3 py-1 rounded-full">
+             {restaurant.price_range}
+          </span>
+            )}
           <div className="mt-4 mb-6">
             <h2 className="text-xl font-semibold text-indigo-600 mb-2">説明</h2>
             <p className="text-gray-700 mb-4">{restaurant.description}</p>
