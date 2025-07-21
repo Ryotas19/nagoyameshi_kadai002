@@ -33,6 +33,7 @@ function App() {
                     <Route path="/upgrade" element={<UpgradePage />} />
                     <Route path="/upgrade/success" element={<UpgradeSuccessPage />} />
                     <Route path="/payment/success" element={<PaymentSuccessPage />} />
+                    <Route path="/payment/success/:session_id" element={<PaymentSuccessPage />} />
                     <Route path="/payment/cancelled" element={<PaymentCancelledPage />} />
                     <Route path="/password/reset" element={<PasswordResetRequestPage />} />
                     <Route path="/password-reset/confirm/:uid/:token" element={<PasswordResetConfirmPage />} />
