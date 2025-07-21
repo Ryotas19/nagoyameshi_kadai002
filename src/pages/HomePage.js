@@ -128,8 +128,8 @@ const HomePage = () => {
                         <option value="">標準</option>
                         <option value="-avg_rating">評価の高い順</option>
                         <option value="avg_rating">評価の低い順</option>
-                        <option value="price_min">価格が高い順</option>   
-                        <option value="-price_min">価格が安い順</option>
+                        <option value="price_min">価格が安い順</option>   
+                        <option value="-price_min">価格が高い順</option>
                     </select>
                 </div>
 
