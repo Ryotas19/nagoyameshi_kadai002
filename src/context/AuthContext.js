@@ -9,6 +9,22 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(() => localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null);
     const navigate = useNavigate();
 
+    // ① ユーザー再取得用の関数（これを追加）
+    const fetchUser = async () => {
+        if (!authTokens) return;
+        try {
+            const response = await axiosInstance.get('/auth/user/', { // ←エンドポイント注意
+                headers: {
+                    Authorization: `Bearer ${authTokens.access}`,
+                },
+            });
+            setUser(response.data);
+            localStorage.setItem('user', JSON.stringify(response.data));
+        } catch (error) {
+            console.error('ユーザー情報の取得に失敗', error);
+        }
+    };
+
     const loginUser = async (email, password) => {
         const response = await axiosInstance.post('/auth/login/', {
             email,
@@ -16,10 +32,8 @@ export const AuthProvider = ({ children }) => {
         });
         if (response.status === 200) {
             setAuthTokens(response.data);
-            // レスポンスから完全なユーザーオブジェクトを設定
             setUser(response.data.user); 
             localStorage.setItem('authTokens', JSON.stringify(response.data));
-            // ユーザーオブジェクトもローカルストレージに保存
             localStorage.setItem('user', JSON.stringify(response.data.user)); 
             navigate('/');
         }
@@ -33,12 +47,14 @@ export const AuthProvider = ({ children }) => {
         navigate('/login');
     };
 
+    // ② contextDataにfetchUserも追加！
     const contextData = {
         user,
         setUser,
         authTokens,
         loginUser,
         logoutUser,
+        fetchUser, 
     };
 
     return (
