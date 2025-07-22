@@ -17,6 +17,7 @@ import PasswordResetConfirmPage from './pages/PasswordResetConfirmPage';
 import VerificationSentPage from './pages/VerificationSentPage';
 import EmailVerifiedPage from './pages/EmailVerifiedPage';
 import MyPage from './pages/MyPage';
+import ConfirmEmailPage from './pages/confirm-email';
 
 function App() {
     return (
