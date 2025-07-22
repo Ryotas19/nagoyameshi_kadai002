@@ -11,9 +11,15 @@ const ConfirmEmailPage = () => {
     // バックエンドの認証APIにPOST
     fetch('https://nagoyameshi-backend-bc605deb266b.herokuapp.com/api/auth/account-confirm-email/', {
         method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key }),
-    })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key })
+      })
+     .then(() => {
+        setStatus('メール認証が完了しました！マイページへ移動します...');
+        setTimeout(() => {
+          window.location.href = '/mypage';  // ← マイページのパスに合わせて修正
+        }, 1500);
+      })      
       .then(res => res.ok ? res.json() : Promise.reject(res))
       .then(() => setStatus('メール認証が完了しました！ログインしてください。'))
       .catch(() => setStatus('認証に失敗しました。リンクが無効か、すでに認証済みです。'));
