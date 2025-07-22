@@ -25,7 +25,7 @@ const Header = () => {
             <>
               <Link to="/mypage" className="text-gray-600 hover:text-yellow-500">マイページ</Link>
               {/* ★有料会員のみ */}
-              {user.is_premium && (
+              {user.plan === 'premium' && (
                 <>
                   <Link to="/reservations" className="text-gray-600 hover:text-yellow-500">予約一覧</Link>
                   <Link to="/favorites" className="text-gray-600 hover:text-yellow-500">お気に入り</Link>
@@ -61,7 +61,7 @@ const Header = () => {
               <>
                 <Link to="/mypage" onClick={toggleMenu} className="text-gray-600 hover:text-yellow-500">マイページ</Link>
                 {/* ★有料会員のみ */}
-                {user.is_premium && (
+                {user.plan === 'premium' && (
                   <>
                     <Link to="/reservations" onClick={toggleMenu} className="text-gray-600 hover:text-yellow-500">予約一覧</Link>
                     <Link to="/favorites" onClick={toggleMenu} className="text-gray-600 hover:text-yellow-500">お気に入り</Link>
