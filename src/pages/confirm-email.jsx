@@ -11,8 +11,8 @@ const ConfirmEmailPage = () => {
     if (!key) return;
     fetch('https://nagoyameshi-backend-bc605deb266b.herokuapp.com/api/auth/account-confirm-email/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key })
+      body: `key=${key}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .then(res => {
       if (!res.ok) throw new Error('認証失敗');
