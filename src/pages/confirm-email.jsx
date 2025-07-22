@@ -7,32 +7,25 @@ const ConfirmEmailPage = () => {
   const [status, setStatus] = useState('処理中...');
 
   useEffect(() => {
-    if (!router.isReady || !key) return;  // ← ここが超重要！
-
-    const postConfirm = async () => {
-      try {
-        const res = await fetch('https://nagoyameshi-backend-bc605deb266b.herokuapp.com/api/auth/account-confirm-email/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ key })
-        });
-
-        if (res.ok) {
-          setStatus('メール認証が完了しました！マイページへ移動します...');
-          setTimeout(() => {
-            window.location.href = '/mypage';
-          }, 1500);
-        } else {
-          const data = await res.json();
-          setStatus(`認証に失敗しました: ${data.detail || 'Unknown error'}`);
-        }
-      } catch (err) {
-        setStatus('サーバーエラーが発生しました。');
-      }
-    };
-
-    postConfirm();
-  }, [router.isReady, key]); // ← router.isReadyを依存に追加
+    console.log("key:", key);  // ★ここで必ず確認
+    if (!key) return;
+    fetch('https://nagoyameshi-backend-bc605deb266b.herokuapp.com/api/auth/account-confirm-email/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key })
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('認証失敗');
+      return res.json();
+    })
+    .then(() => {
+      setStatus('メール認証が完了しました！マイページへ移動します...');
+      setTimeout(() => {
+        window.location.href = '/mypage';
+      }, 1500);
+    })
+    .catch(() => setStatus('認証に失敗しました。リンクが無効か、すでに認証済みです。'));
+  }, [key]);
 
   return (
     <div style={{ padding: 40, textAlign: 'center' }}>
