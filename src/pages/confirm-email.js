@@ -29,6 +29,7 @@ const ConfirmEmailPage = () => {
         setStatus('認証に失敗しました。リンクが無効か、すでに認証済みです。');
       });
   }, [key, navigate]);
+  
 
   return (
     <div style={{ padding: 40, textAlign: 'center' }}>
