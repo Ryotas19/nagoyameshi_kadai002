@@ -17,7 +17,7 @@ const ConfirmEmailPage = () => {
       return;
     }
 
-    const API_URL = `${process.env.REACT_APP_API_URL}/api/auth/registration/verify-email/`;
+    const API_URL = `${process.env.REACT_APP_API_URL}/auth/registration/verify-email/`;
     console.log('API_URL:', API_URL);
 
     axios.post(API_URL, { key })
