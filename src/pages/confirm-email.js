@@ -18,20 +18,18 @@ const ConfirmEmailPage = () => {
     }
 
     const API_URL = `${process.env.REACT_APP_API_URL}/auth/registration/verify-email/`;
-    console.log('API_URL:', API_URL);
 
     axios.post(API_URL, { key })
       .then(() => {
-        setStatus('メール認証が完了しました！マイページへ移動します...');
+        setStatus('メール認証が完了しました！ログイン画面に移動します...');
         setTimeout(() => {
-          navigate('/mypage');
+          navigate('/login');   
         }, 2000);
       })
-      .catch(error => {
+      .catch(() => {
         setStatus('認証に失敗しました。リンクが無効か、すでに認証済みです。');
       });
   }, [key, navigate]);
-
 
   return (
     <div style={{ padding: 40, textAlign: 'center' }}>
