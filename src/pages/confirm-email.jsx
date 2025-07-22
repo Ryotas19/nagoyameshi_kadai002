@@ -7,7 +7,7 @@ const ConfirmEmailPage = () => {
   const [executed, setExecuted] = useState(false);
 
   useEffect(() => {
-    if (!router.isReady) return; // ← これが大事
+    if (!router.isReady) return; // ← 必須ポイント！
     const { key } = router.query;
     console.log("key:", key);
     if (!key || executed) return;
@@ -16,7 +16,7 @@ const ConfirmEmailPage = () => {
     fetch('https://nagoyameshi-backend-bc605deb266b.herokuapp.com/api/auth/account-confirm-email/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key }), // ← ここも application/json で！
+      body: JSON.stringify({ key }),
     })
     .then(res => {
       if (!res.ok) throw new Error('認証失敗');
