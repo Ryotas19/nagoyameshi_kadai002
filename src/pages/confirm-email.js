@@ -3,20 +3,19 @@ import { useRouter } from 'next/router';
 
 const ConfirmEmailPage = () => {
   const router = useRouter();
+  const { key } = router.query;
   const [status, setStatus] = useState('処理中...');
-  const [executed, setExecuted] = useState(false);
 
   useEffect(() => {
-    if (!router.isReady) return; // ← 必須ポイント！
-    const { key } = router.query;
+    // ★router.isReadyがtrueの時だけ実行
+    if (!router.isReady) return;
+    console.log("router.query:", router.query);
     console.log("key:", key);
-    if (!key || executed) return;
-    setExecuted(true);
-
+    if (!key) return;
     fetch('https://nagoyameshi-backend-bc605deb266b.herokuapp.com/api/auth/account-confirm-email/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key }),
+      body: `key=${key}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .then(res => {
       if (!res.ok) throw new Error('認証失敗');
@@ -29,7 +28,7 @@ const ConfirmEmailPage = () => {
       }, 1500);
     })
     .catch(() => setStatus('認証に失敗しました。リンクが無効か、すでに認証済みです。'));
-  }, [router.isReady, router.query, executed]);
+  }, [router.isReady, key]);
 
   return (
     <div style={{ padding: 40, textAlign: 'center' }}>
