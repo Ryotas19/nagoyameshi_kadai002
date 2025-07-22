@@ -21,9 +21,14 @@ const Header = () => {
         <nav className="hidden md:flex items-center space-x-4">
           {user ? (
             <>
-              <Link to="/mypage"    className="text-gray-600 hover:text-yellow-500">マイページ</Link>
-              <Link to="/reservations" className="text-gray-600 hover:text-yellow-500">予約一覧</Link>
-              <Link to="/favorites"   className="text-gray-600 hover:text-yellow-500">お気に入り</Link>
+              <Link to="/mypage" className="text-gray-600 hover:text-yellow-500">マイページ</Link>
+              {/* ★有料会員のみ */}
+              {user.is_premium && (
+                <>
+                  <Link to="/reservations" className="text-gray-600 hover:text-yellow-500">予約一覧</Link>
+                  <Link to="/favorites" className="text-gray-600 hover:text-yellow-500">お気に入り</Link>
+                </>
+              )}
               <span className="text-gray-800">ようこそ {user.username} さん</span>
               <button onClick={logoutUser} className="text-gray-600 hover:text-yellow-500">ログアウト</button>
             </>
@@ -52,9 +57,14 @@ const Header = () => {
           <nav className="flex flex-col p-4 space-y-2">
             {user ? (
               <>
-                <Link to="/mypage"      onClick={toggleMenu} className="text-gray-600 hover:text-yellow-500">マイページ</Link>
-                <Link to="/reservations" onClick={toggleMenu} className="text-gray-600 hover:text-yellow-500">予約一覧</Link>
-                <Link to="/favorites"    onClick={toggleMenu} className="text-gray-600 hover:text-yellow-500">お気に入り</Link>
+                <Link to="/mypage" onClick={toggleMenu} className="text-gray-600 hover:text-yellow-500">マイページ</Link>
+                {/* ★有料会員のみ */}
+                {user.is_premium && (
+                  <>
+                    <Link to="/reservations" onClick={toggleMenu} className="text-gray-600 hover:text-yellow-500">予約一覧</Link>
+                    <Link to="/favorites" onClick={toggleMenu} className="text-gray-600 hover:text-yellow-500">お気に入り</Link>
+                  </>
+                )}
                 <span className="text-gray-800">ようこそ {user.username} さん</span>
                 <button
                   onClick={() => { logoutUser(); toggleMenu(); }}
@@ -65,7 +75,7 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Link to="/login"  onClick={toggleMenu} className="text-gray-600 hover:text-yellow-500">ログイン</Link>
+                <Link to="/login" onClick={toggleMenu} className="text-gray-600 hover:text-yellow-500">ログイン</Link>
                 <Link to="/signup" onClick={toggleMenu} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 text-center">
                   会員登録
                 </Link>
