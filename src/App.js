@@ -40,6 +40,7 @@ function App() {
                     <Route path="/verification-sent" element={<VerificationSentPage />} />
                     <Route path="/account-confirm-email/:key" element={<EmailVerifiedPage />} />
                     <Route path="/mypage" element={<MyPage />} />
+                    <Route path="/confirm-email" element={<ConfirmEmailPage />} />
                 </Routes>
             </main>
         </div>
