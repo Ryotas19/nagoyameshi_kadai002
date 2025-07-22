@@ -3,6 +3,13 @@
   "clean_urls": true,
   "routes": {
     "/**": "index.html"
-  }
+  },
+  "exclude": [
+    "static/*",
+    "asset-manifest.json",
+    "manifest.json",
+    "favicon.ico",
+    "logo192.png",
+    "logo512.png"
+  ]
 }
-
